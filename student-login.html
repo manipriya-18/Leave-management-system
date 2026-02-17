@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login | LeaveSync</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "var(--primary)",
+                        secondary: "var(--secondary)",
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+
+    <!-- Background Blob -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
+        <div class="absolute top-[10%] left-[30%] w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse">
+        </div>
+        <div class="absolute bottom-[10%] right-[30%] w-80 h-80 bg-secondary/20 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-lg animate-fade-in shadow-2xl">
+        <div class="text-center mb-10">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary mb-6 shadow-lg shadow-primary/20">
+                <span class="text-3xl font-bold text-white">S</span>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">Student Access</h1>
+            <p class="text-muted">Enter your credentials to continue</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Student ID</label>
+                <input type="text" id="studentId" name="studentId" required
+                    class="w-full px-5 py-4 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all text-lg"
+                    placeholder="e.g. S123" />
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Password</label>
+                <input type="password" id="password" name="password" required
+                    class="w-full px-5 py-4 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all text-lg"
+                    placeholder="••••••••" />
+            </div>
+
+            <button type="submit"
+                class="w-full py-4 btn-primary rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all mt-4">
+                Sign In
+            </button>
+
+            <p class="text-center text-sm text-muted mt-6">
+                Not a student? <a href="faculty-login.html" class="text-primary hover:underline font-medium">Faculty
+                    Login</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const studentId = document.getElementById("studentId").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const res = await fetch("http://localhost:3000/api/auth/student/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ studentId, password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem("studentToken", data.token);
+                    localStorage.setItem("studentName", data.student.name);
+                    localStorage.setItem("studentId", data.student.studentId);
+                    window.location.href = "student-dashboard.html"; // Updated redirect
+                } else {
+                    alert(data.error);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Login failed: Backend may be offline.");
+            }
+        });
+    </script>
+</body>
+
+</html>

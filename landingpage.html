@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>LeaveSync | Smart Campus Leave Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            secondary: "var(--secondary)",
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="antialiased text-slate-800 bg-white">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">
+          L
+        </div>
+        <span class="text-xl font-bold tracking-tight text-slate-900">Leave<span class="text-primary">Sync</span></span>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+        <a href="#" class="hover:text-primary transition-colors">Features</a>
+        <a href="#" class="hover:text-primary transition-colors">How it works</a>
+        <a href="#" class="hover:text-primary transition-colors">Support</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="student-login.html"
+          class="hidden md:inline-flex px-4 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition-colors">
+          Log in
+        </a>
+        <a href="student-login.html"
+          class="bg-primary text-white px-5 py-2 rounded-lg font-medium text-sm hover:bg-blue-700 transition-colors shadow-sm">
+          Get Started
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="max-w-7xl mx-auto px-6 py-20 lg:py-32 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6 max-w-2xl">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-primary rounded-full text-xs font-semibold uppercase tracking-wider border border-blue-100">
+          New Semester Updates
+        </div>
+
+        <h1 class="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+          Campus Leave Management, <br />
+          <span class="text-primary">Simplified.</span>
+        </h1>
+
+        <p class="text-lg text-slate-600 leading-relaxed">
+          The official portal for efficient leave processing. Connects students, faculty, and administration in one
+          seamless workflow.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <a href="student-login.html"
+            class="px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-sm flex items-center justify-center gap-2">
+            Student Login
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+          <a href="faculty-login.html"
+            class="px-8 py-3 bg-white border border-slate-200 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-colors flex items-center justify-center">
+            Faculty Portal
+          </a>
+        </div>
+
+        <div class="pt-8 flex items-center gap-4 text-sm text-slate-500">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
+            <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"></div>
+            <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"></div>
+          </div>
+          <p>Used by <span class="font-bold text-slate-900">10,000+</span> scholars daily.</p>
+        </div>
+      </div>
+
+      <div class="relative hidden lg:block">
+        <!-- Clean Hero Image Placeholder -->
+        <div class="bg-indigo-50 rounded-2xl p-8 border border-indigo-100 shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 opacity-10">
+            <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+              <path
+                d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z" />
+            </svg>
+          </div>
+
+          <div class="relative z-10 space-y-4">
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 flex items-center gap-4">
+              <div
+                class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold">✓
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">Leave Approved</h4>
+                <p class="text-xs text-slate-500">Your medical leave has been approved by Prof. Smith</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 flex items-center gap-4 opacity-60">
+              <div
+                class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 font-bold">
+                ⏳</div>
+              <div>
+                <h4 class="font-bold text-slate-900">Pending Review</h4>
+                <p class="text-xs text-slate-500">Casual leave request awaiting approval</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-slate-50 py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <h2 class="text-3xl font-bold text-slate-900 mb-4">Why use LeaveSync?</h2>
+          <p class="text-slate-600">Streamlining administrative processes for a better educational environment.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-6 text-2xl">
+              🚀
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Fast Applications</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Apply for leave in seconds with pre-filled forms. No more paper applications.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div
+              class="w-12 h-12 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center mb-6 text-2xl">
+              🔔
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Real-time Alerts</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Get notified immediately via email and dashboard when your request status changes.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div
+              class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center mb-6 text-2xl">
+              📊
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Attendance Tracking</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Monitor your attendance percentage and history transparently throughout the semester.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-slate-500 text-sm">
+        &copy; 2024 University Leave Management System. All rights reserved.
+      </div>
+      <div class="flex gap-6 text-sm font-medium text-slate-600">
+        <a href="#" class="hover:text-primary">Privacy Policy</a>
+        <a href="#" class="hover:text-primary">Terms of Service</a>
+        <a href="#" class="hover:text-primary">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Logic - Optional: Keep if user wants to switch back to dark, 
+    // but default content above is styled for light.
+    // If we want to support dark mode properly with this new layout,
+    // we should use dark: variants. I added some slate-900/white,
+    // but the request was for "Classic Page" which usually implies a clean light theme.
+    // I will remove the toggle for now to keep it strictly "Classic" as requested.
+  </script>
+</body>
+
+</html>

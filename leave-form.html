@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Request Leave | LeaveSync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            secondary: "var(--secondary)",
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          }
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="min-h-screen pt-24 pb-12 px-6">
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <a href="landingpage.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-lg text-white font-bold text-xl">
+            L
+          </div>
+          <span class="text-xl font-bold tracking-tight">Leave<span class="text-primary">Sync</span></span>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="student-dashboard.html"
+          class="flex items-center gap-2 text-sm font-medium text-muted hover:text-primary transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+            </path>
+          </svg>
+          Back to Dashboard
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-3xl mx-auto animate-slide-up">
+    <div class="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden">
+      <!-- Decor -->
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2">
+      </div>
+
+      <div class="relative z-10">
+        <div class="mb-10">
+          <h2 class="text-3xl font-bold mb-2">New Leave Request</h2>
+          <p class="text-muted">Fill in the details below. Days are calculated automatically.</p>
+        </div>
+
+        <form id="leaveForm" class="space-y-8">
+          <!-- Student Info Section -->
+          <div class="space-y-6">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-muted border-b border-white/10 pb-2">Student
+              Information</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Auto-filled Fields -->
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Student ID</label>
+                <input name="studentId" id="studentId" class="w-full px-4 py-3 rounded-xl opacity-70 cursor-not-allowed"
+                  required readonly placeholder="Loading..." />
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Full Name</label>
+                <input name="studentName" id="studentName"
+                  class="w-full px-4 py-3 rounded-xl opacity-70 cursor-not-allowed" required readonly
+                  placeholder="Loading..." />
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Your Email</label>
+                <input type="email" name="studentEmail"
+                  class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all" required
+                  placeholder="name@college.edu" />
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Class / Section</label>
+                <input name="className"
+                  class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all" required
+                  placeholder="e.g. CS-A" />
+              </div>
+              <div class="space-y-2 md:col-span-2">
+                <label class="block text-sm font-medium text-muted">Parent Contact</label>
+                <input name="parentContact"
+                  class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all" required
+                  placeholder="+91 XXXX XXXX" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Leave Details Section -->
+          <div class="space-y-6">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-muted border-b border-white/10 pb-2">Leave
+              Details</h3>
+
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-muted">Leave Type</label>
+              <select name="leaveType"
+                class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all appearance-none cursor-pointer"
+                required>
+                <option value="" disabled selected>Select category</option>
+                <option value="sick">Sick Leave</option>
+                <option value="casual">Casual Leave</option>
+                <option value="emergency">Emergency Leave</option>
+              </select>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Start Date</label>
+                <input type="date" name="startDate" id="startDate"
+                  class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all cursor-pointer"
+                  required />
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">End Date</label>
+                <input type="date" name="endDate" id="endDate"
+                  class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all cursor-pointer"
+                  required />
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-muted">Total Days</label>
+                <input type="number" name="totalDays" id="totalDays"
+                  class="w-full px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold border-primary/20 focus:outline-none text-center"
+                  required readonly placeholder="0" />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-muted">Detailed Reason</label>
+              <textarea name="reason" rows="4"
+                class="w-full px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                required placeholder="Explain why you need leave..."></textarea>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button type="submit"
+              class="w-full py-4 btn-primary rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all">
+              Submit Application
+            </button>
+          </div>
+
+          <!-- Success Message -->
+          <div id="successMsg"
+            class="hidden bg-emerald-500/10 text-emerald-500 p-4 rounded-xl text-center border border-emerald-500/20 animate-fade-in flex items-center justify-center gap-2 font-medium">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            Leave request submitted successfully!
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Theme setup
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Auto-fill student data
+    window.onload = () => {
+      const sid = localStorage.getItem('studentId') || 'S123'; // Default for demo if empty
+      const sname = localStorage.getItem('studentName') || 'John Doe';
+      document.getElementById('studentId').value = sid;
+      document.getElementById('studentName').value = sname;
+    };
+
+    // Auto-Calculate Days
+    const startDateEl = document.getElementById('startDate');
+    const endDateEl = document.getElementById('endDate');
+    const totalDaysEl = document.getElementById('totalDays');
+
+    function calculateDays() {
+      if (startDateEl.value && endDateEl.value) {
+        const start = new Date(startDateEl.value);
+        const end = new Date(endDateEl.value);
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+        if (end < start) {
+          totalDaysEl.value = 0;
+        } else {
+          totalDaysEl.value = diffDays;
+        }
+      }
+    }
+
+    startDateEl.addEventListener('change', calculateDays);
+    endDateEl.addEventListener('change', calculateDays);
+
+
+    // Form Submission
+    document.getElementById("leaveForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const rawData = Object.fromEntries(new FormData(e.target));
+      const formData = Object.fromEntries(
+        Object.entries(rawData).map(([key, value]) => [
+          key,
+          typeof value === "string" ? value.trim() : value
+        ])
+      );
+
+      // Add teacherId automatically (Hardcoded for logic as requested to remove field)
+      formData.teacherId = "T101";
+      formData.teacherName = "Faculty"; // Defaulting
+
+      try {
+        const res = await fetch("http://localhost:3000/api/leave/requests", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+        const result = await res.json();
+
+        if (res.ok) {
+          document.getElementById("successMsg").classList.remove("hidden");
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          e.target.reset();
+          // Re-fill auto data after reset
+          window.onload();
+          totalDaysEl.value = "";
+          setTimeout(() => {
+            document.getElementById("successMsg").classList.add("hidden");
+          }, 5000);
+        } else {
+          alert(result.error || "Failed to submit leave");
+        }
+      } catch (err) {
+        alert("Backend not running. Please start the server at :3000");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+
+</html>

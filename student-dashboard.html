@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard | LeavePortal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            secondary: "var(--secondary)",
+            bgbase: "var(--bg-body)",
+            card: "var(--bg-card)",
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-bgbase text-[var(--text-main)] min-h-screen">
+
+  <header class="glass-header sticky top-0 z-50">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">
+          S
+        </div>
+        <span class="text-lg font-bold">Student<span class="text-primary">Portal</span></span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="student-notifications.html" class="relative hover:text-primary transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+            </path>
+          </svg>
+        </a>
+        <button onclick="logout()" class="text-sm font-medium hover:text-primary transition-colors">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-10 animate-fade-in">
+
+    <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-10">
+      <div>
+        <h1 class="text-3xl font-bold mb-2">Welcome, <span id="studentName">Student</span></h1>
+        <p class="text-[var(--text-muted)]">Track your leaves and attendance.</p>
+      </div>
+      <a href="leave-form.html"
+        class="btn-primary px-6 py-3 flex items-center gap-2 shadow-lg hover:shadow-xl transition-all">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Apply New Leave
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="card p-6">
+        <h4 class="text-xs uppercase font-bold text-[var(--text-muted)] mb-2">My Attendance</h4>
+        <div class="flex items-end gap-3">
+          <span class="text-4xl font-bold text-main" id="attendanceVal">--%</span>
+          <span class="text-sm font-medium text-emerald-500 mb-1">On Track</span>
+        </div>
+        <div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full mt-4 overflow-hidden">
+          <div class="h-full bg-blue-500 w-[85%] rounded-full"></div>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <h4 class="text-xs uppercase font-bold text-[var(--text-muted)] mb-2">Semester Performance</h4>
+        <div class="flex items-end gap-3">
+          <span class="text-4xl font-bold text-main" id="semVal">--</span>
+          <span class="text-sm font-medium text-[var(--text-muted)] mb-1">CGPA</span>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <h4 class="text-xs uppercase font-bold text-[var(--text-muted)] mb-2">Pending Requests</h4>
+        <div class="flex items-end gap-3">
+          <span class="text-4xl font-bold text-amber-500" id="pendingVal">0</span>
+          <span class="text-sm font-medium text-[var(--text-muted)] mb-1">Waiting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="card p-6">
+      <h3 class="text-lg font-bold mb-6">Application History</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="text-xs uppercase tracking-wider text-[var(--text-muted)] border-b border-[var(--border-color)]">
+              <th class="pb-3 pl-4">Type</th>
+              <th class="pb-3">Duration</th>
+              <th class="pb-3">Dates</th>
+              <th class="pb-3">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border-color)]" id="historyTable">
+            <tr>
+              <td class="py-4 text-center text-[var(--text-muted)]" colspan="4">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+      </path>
+    </svg>
+  </button>
+
+  <script>
+    // Theme Logic
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    // Load Data
+    const studentName = localStorage.getItem('studentName') || 'Student';
+    // Logic to parse mock stats from localStorage if I saved them during login, creating fallback
+    // Since I didn't save them in the Student Login logic yet (only token/name), I can just mock here or update login to save them.
+    // For now, I'll update the display with hardcoded or random values to show the UI change.
+
+    document.getElementById('studentName').textContent = studentName;
+    document.getElementById('attendanceVal').textContent = "87.5%";
+    document.getElementById('semVal').textContent = "9.2";
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "landingpage.html";
+    }
+  </script>
+</body>
+
+</html>
